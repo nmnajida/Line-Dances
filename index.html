@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Line Dances</title>
+<!-- Line-Dancing-Videos-E-03 -->
+<meta name="description" content="Our line dances with a link to each YouTube video">
+<meta property="og:title" content="Line Dances">
+<meta property="og:description" content="Our line dances with a link to each YouTube video">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: one narrow column — header with search, then an alphabetical list of dances with letter dividers */
+:root{
+  --bg:#f3f5f8; --card:#ffffff; --fg:#1d2433; --muted:#5d6779; --line:#d9dee7;
+  --accent:#2f4f8f; --accent-soft:#e3e9f5; --play:#c2412d;
+  --display:"Rokkitt", Georgia, serif;
+  --body:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131722; --card:#1b2130; --fg:#e7eaf1; --muted:#9aa3b5; --line:#2c3446;
+  --accent:#9db5ea; --accent-soft:#25304a; --play:#f08a74; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131722; --card:#1b2130; --fg:#e7eaf1; --muted:#9aa3b5; --line:#2c3446;
+  --accent:#9db5ea; --accent-soft:#25304a; --play:#f08a74; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.45;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:28px 48px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-direction:column;gap:6px}
+h1{font-family:var(--display);font-weight:700;font-size:2.4rem;line-height:1.05;margin:0;text-wrap:balance;color:var(--accent)}
+.sub{color:var(--muted);margin:0}
+.search{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--bg);padding-block:8px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+#q{width:100%;box-sizing:border-box;font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg)}
+#q:focus{outline:2px solid var(--accent);outline-offset:1px}
+.letter{font-family:var(--display);font-weight:700;font-size:1.4rem;color:var(--muted);
+  border-bottom:1px solid var(--line);padding-bottom:2px;margin:10px 0 4px}
+ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+li{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.name{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.2}
+a.play{color:var(--fg);text-decoration:none;display:inline-flex;gap:8px;align-items:baseline}
+a.play .tri{color:var(--play);font-size:.9em}
+a.play:hover span.t, a.play:focus-visible span.t{text-decoration:underline;color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.meta{color:var(--muted);font-size:.93rem;overflow-wrap:anywhere}
+.meta b{font-weight:600;color:var(--fg)}
+.extras{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px}
+.chip{font-size:.8rem;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+a.chip{text-decoration:none;font-weight:600}
+a.chip:hover{text-decoration:underline}
+.novid{font-size:.8rem;color:var(--muted);font-style:italic}
+.empty{color:var(--muted);text-align:center;padding:24px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Line Dances</h1>
+    <p class="sub" id="count"></p>
+  </header>
+  <div class="search">
+    <label for="q" class="sub" style="position:absolute;left:-9999px">Search dances</label>
+    <input id="q" type="search" placeholder="Search by dance, choreographer or music…" autocomplete="off">
+  </div>
+  <div id="list"></div>
+  <p class="empty" id="none" hidden>No dances match that search.</p>
+</div>
+
+<script>
+const PL="&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=";
+const Y=(id,i)=>"https://www.youtube.com/watch?v="+id+(i?PL+i:"");
+const D=[
+["Absolute Dreams","Joyce Plaskett","Land of Dreams - Rosanne Cash",Y("Xhe6vYlDeXc",34)],
+["Andalouse","Fabien Regoli","Kendji Girac",Y("kQ-nHVdAZkE",49),"2eme & 4eme sections modifiée"],
+["Bachatango","Fernando Rey","Tu Mi Lucero - Fernando Rey",Y("SB89gcmyxBs",32)],
+["Back to the Start","Hayley Wheatley","Michael Schulte",Y("ww3UXZCmEq8",113)],
+["Canadian Stomp","Cindy Hall & Ginny Smith","Any Man of Mine - Shania Twain",Y("BvhI7M7hz-M",63),"section 4 modifiée"],
+["Choosin Texas","Nidhi Risi","Ella Langley",Y("ocWKwFr-lBI",86)],
+["Coco Na Na","Alison Johnstone","Everything's Alright - Azteck, DJ Koko",Y("Pzvh6sz7sRM",118)],
+["Crash and Burn","Gail Smith","Thomas Rhett",Y("cOpzaoK8EW0",23)],
+["Country Boom Boom","Frank Trace","Boom Boom - Lucas Hoge",Y("KWjs-L3EYhQ",54)],
+["Country Boy Loving","Maddison Glover","I'm from the Country - Tracy Byrd",Y("VRVsk56Lc9A",14)],
+["Cuban Rhythm","Frank Trace","La Echame Culpa - Luis Fonsi (mon choix)",Y("JekA2i5Ea98",23)],
+["Cumbia Conmigo","Ira Weisburd","La Vida es un Carnival - Celia Cruz (mon choix)",Y("pd3xyQi7mMk",4)],
+["Cumbia Semana","Ira Weisburd","Fin de Semana - Fito Olivares",Y("EzHtKOrb6WA",2)],
+["Don't Wanna Dance","Frank Trace","Toby X",Y("enYnEAs3e4A",28)],
+["Do Ya Love Me","Paula Jayne Ogilvie","The Contours - Sweet Soul Music",Y("4FlKT3z6X3o",83)],
+["Easy to Blame","Tina Argyle","Blame - James Johnson",Y("RhG6zUTMXm0",109)],
+["French Toast","Frank Trace","Mes Emmerdes - Charles Aznavour",Y("yYoOysIUSGU",52)],
+["Fly Me to the Moon","Rosie Malari","Viens on Essaie - Vitaa & Julien Dore (mon choix)",Y("MjwnWDOWA40",30)],
+["Free and Easy","Malcolm & Viv Owen","That's how I got to Memphis - Roch Voisine",Y("X_TEkt5y9cE",41)],
+["Gives me Shivers","Brandon Zahorsky","Ed Sheeran (Ofenbach Remix)",Y("y-sW4WwIFCo"),"section 2 modifiée",[["version française",Y("v4_IkAFau0w")]]],
+["Glass of Wine","Malene Jakobsen","Cry to Me - Solomon Burke",Y("42CMX9xAhhA",66)],
+["Half a Cha","Rob Fowler","Half a Song - Cody Johnson",Y("hX4hSJDpBGg",33)],
+["Hit the Road Jack","Michelle Miller","Ray Charles",""],
+["Heave Away","Rob Fowler","The Fables",Y("tx8d8TdJzB0",44)],
+["Homecoming","Lee Hamilton","Don Louis",Y("MkWVyXZmyCE",84)],
+["Hoedown","Gary O'Reilly","Ink",Y("YEi34tBR2oM",77)],
+["I love that Dance","Tim Gauci","&5678 Productions",Y("a9OUuN0ml30",102)],
+["J'ai Cherché","Fred Aireche","Derniere Danse - Indila (mon choix)",Y("B9WZBHIjaag",20)],
+["Jerusalema","Adilson Maiza","Master KG",Y("b54P7xPiBjI")],
+["Kuduro","","Danza Kuduro - Don Lore V",Y("Q6LCJADfVCs"),"section 4 modifiée"],
+["La Chappeloise","","Tell Me Ma - Sham Rock",Y("Hy1OAD9eOaw",40)],
+["Little Cupid","Frank Trace","Stand by Me - Ben E King (mon choix)",Y("hBFwj6Sw0kg",25)],
+["Little Rhumba","Donna Laurin","Sway - Michael Buble",Y("j0s9TPRGkZM",27)],
+["Loca Loca","Roy Verdonk","DJ XOXO",Y("aqUg8gRhNkQ",91)],
+["Love Potion 666","Rob Fowler","DJTEXX",Y("GFkrIuoZ_zM",75)],
+["Madison","","Last Night - Chris Anderson",Y("SFQvp1cISAA",65)],
+["Movimiento","Karl Harry Winson","Noevan Cielo",Y("UkkU2LBRn5g",103),"tutorial",[["dance","https://www.youtube.com/watch?v=gh0QmoGPEAU&t=41s"]]],
+["9 to 5","Lesley Stewart","Dolly Parton",Y("MShev6VmfjQ")],
+["Red Hot Salsa","Christina Browner","Dave Sheriff",Y("QADVc6NPh9c",45)],
+["SNAP","Vivienne Scott","Anthem - Brett Kissel",Y("kG_yRiwwH6Q",18)],
+["Southern Soul Bounce","Ira Weisburd & Roy Verdonk","Ms Jody","https://www.youtube.com/watch?v=w0LoRMRcRFw&t=299s"],
+["Stomp 2,3,4","Rob Fowler","2341 Studios",Y("KZLKhzADJCY",74)],
+["Strummingbird","Maddison Glover","One More - James Johnston",Y("IPsPe6V8VD4",108)],
+["Suavemente","Michelle Miller","Suave - Nayer",""],
+["Sweet Pea","Frank Trace","Bebeto - Kendji Girac & Soolking (mon choix)",Y("Ku6pG656wGw",49)],
+["The Door","Jeff & Kari Smilko","Teddy Swims",Y("RzhkJwQNE9g",35)],
+["The Majestic","Frank Trace","Dion & the Belmonts",Y("3aS5yVrBPt0",21)],
+["The Man with the Hat","Gary O'Reilly","Me Auld Skilara Hat - Ciaran Rosney",Y("0OyuUOcnkX4",106)],
+["Until the Dawn","Gary Rafferty","Marvin Gaye - Charlie Puth",Y("PKNlEOn5ZNI",95)],
+["When you Smile","Roy Verdonk","Rune Rudberg",Y("88AmzqHs-z0",94)],
+["Yolanda","Ira Weisburd","Pastor Lopez",Y("k_mcCSmnvt4",6)]
+];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const rows=D.map(([n,c,m,u,note,extra])=>({n,c,m,u,note,extra:extra||[],k:norm([n,c,m,note||""].join(" "))}))
+  .sort((a,b)=>a.n.localeCompare(b.n,"fr",{sensitivity:"base"}));
+const list=document.getElementById("list"),none=document.getElementById("none");
+document.getElementById("count").textContent=rows.length+" dances · tap a name to watch the video";
+function render(q){
+  const t=norm(q.trim());const show=rows.filter(r=>!t||r.k.includes(t));
+  let html="",cur="",open=false;
+  for(const r of show){
+    const L=/[a-z]/i.test(r.n[0])?r.n[0].toUpperCase():"#";
+    if(L!==cur){if(open)html+="</ul>";html+='<div class="letter">'+L+"</div><ul>";cur=L;open=true}
+    const name=r.u?'<a class="play" href="'+esc(r.u)+'" target="_blank" rel="noopener"><span class="tri">▶</span><span class="t">'+esc(r.n)+"</span></a>":esc(r.n);
+    const meta=[r.c?"<b>"+esc(r.c)+"</b>":"",esc(r.m)].filter(Boolean).join(" · ");
+    let ex=r.note?'<span class="chip">'+esc(r.note)+"</span>":"";
+    for(const [lab,url] of r.extra)ex+='<a class="chip" href="'+esc(url)+'" target="_blank" rel="noopener">▶ '+esc(lab)+"</a>";
+    if(!r.u)ex+='<span class="novid">no video yet</span>';
+    html+='<li><div class="name">'+name+'</div><div class="meta">'+meta+"</div>"+(ex?'<div class="extras">'+ex+"</div>":"")+"</li>";
+  }
+  if(open)html+="</ul>";
+  list.innerHTML=html;none.hidden=show.length>0;
+}
+const q=document.getElementById("q");q.addEventListener("input",()=>render(q.value));render("");
+</script>
+
+</body>
+</html>
