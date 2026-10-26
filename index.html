@@ -2,152 +2,156 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Line Dances</title>
-<!-- Line-Dancing-Videos-E-03 -->
+<!-- Line-Dancing-Videos-E-05 -->
 <meta name="description" content="Our line dances with a link to each YouTube video">
 <meta property="og:title" content="Line Dances">
 <meta property="og:description" content="Our line dances with a link to each YouTube video">
 <meta property="og:type" content="website">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap">
 <style>
-/* Layout: one narrow column — header with search, then an alphabetical list of dances with letter dividers */
+/* Layout: one narrow column — title, colour-key banner (doubles as filters), sticky search, alphabetical list */
 :root{
   --bg:#f3f5f8; --card:#ffffff; --fg:#1d2433; --muted:#5d6779; --line:#d9dee7;
   --accent:#2f4f8f; --accent-soft:#e3e9f5; --play:#c2412d;
+  --grey:#a6a6a6; --grey-bg:#e6e7ea; --grey-line:#c3c6cc;
+  --orange:#ed7d31; --orange-bg:#fde6d6; --orange-line:#f4b48a;
+  --banner:#ffffff;
   --display:"Rokkitt", Georgia, serif;
   --body:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+@media (prefers-color-scheme: dark){:root{
   --bg:#131722; --card:#1b2130; --fg:#e7eaf1; --muted:#9aa3b5; --line:#2c3446;
-  --accent:#9db5ea; --accent-soft:#25304a; --play:#f08a74; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#131722; --card:#1b2130; --fg:#e7eaf1; --muted:#9aa3b5; --line:#2c3446;
-  --accent:#9db5ea; --accent-soft:#25304a; --play:#f08a74; color-scheme:dark}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.45;
-  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:28px 48px}
-.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
-header{display:flex;flex-direction:column;gap:6px}
-h1{font-family:var(--display);font-weight:700;font-size:2.4rem;line-height:1.05;margin:0;text-wrap:balance;color:var(--accent)}
+  --accent:#9db5ea; --accent-soft:#25304a; --play:#f08a74;
+  --grey:#8a8f99; --grey-bg:#353a45; --grey-line:#565c69;
+  --orange:#f0904f; --orange-bg:#3d2a1e; --orange-line:#8a5233;
+  --banner:#1b2130; color-scheme:dark}}
+html{-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.45;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-top:calc(28px + env(safe-area-inset-top, 0px));padding-bottom:calc(48px + env(safe-area-inset-bottom, 0px))}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header{display:flex;flex-direction:column;gap:4px}
+h1{font-family:var(--display);font-weight:700;font-size:2.4rem;line-height:1.05;margin:0;color:var(--accent)}
 .sub{color:var(--muted);margin:0}
-.search{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--bg);padding-block:8px}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+.key{background:var(--banner);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.key-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.key-t{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:.02em}
+.key-hint{font-size:.82rem;color:var(--muted)}
+.key-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.k{font:inherit;color:var(--fg);text-align:left;cursor:pointer;display:flex;gap:10px;align-items:center;
+  padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:var(--card)}
+.k .sw{flex:none;width:22px;height:22px;border-radius:5px}
+.k .lbl{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.k .en{font-weight:600}
+.k .fr{font-size:.88rem;color:var(--muted);font-style:italic}
+.k .n{margin-left:auto;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.k[data-c="new"] .sw{background:var(--grey)}
+.k[data-c="alt"] .sw{background:var(--orange)}
+.k[aria-pressed="true"][data-c="new"]{background:var(--grey-bg);border-color:var(--grey)}
+.k[aria-pressed="true"][data-c="alt"]{background:var(--orange-bg);border-color:var(--orange)}
+.k:focus-visible,#q:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.search{position:sticky;top:0;z-index:5;background:var(--bg);padding-block:8px;padding-top:calc(8px + env(safe-area-inset-top, 0px));margin-top:calc(-1 * env(safe-area-inset-top, 0px))}
 #q{width:100%;box-sizing:border-box;font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg)}
-#q:focus{outline:2px solid var(--accent);outline-offset:1px}
-.letter{font-family:var(--display);font-weight:700;font-size:1.4rem;color:var(--muted);
-  border-bottom:1px solid var(--line);padding-bottom:2px;margin:10px 0 4px}
-ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.filtering{font-size:.88rem;color:var(--muted);margin:6px 2px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.filtering button{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--card);color:var(--accent);border-radius:999px;padding:2px 10px;cursor:pointer}
+.letter{font-family:var(--display);font-weight:700;font-size:1.4rem;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px;margin:10px 0 4px}
+ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
 li{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:flex;flex-direction:column;gap:3px;min-width:0}
-.name{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.2}
+li.new{background:var(--grey-bg);border-color:var(--grey-line)}
+li.alt{background:var(--orange-bg);border-color:var(--orange-line)}
+.name{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.2;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dot{width:12px;height:12px;border-radius:3px;flex:none}
+li.new .dot{background:var(--grey)} li.alt .dot{background:var(--orange)}
 a.play{color:var(--fg);text-decoration:none;display:inline-flex;gap:8px;align-items:baseline}
 a.play .tri{color:var(--play);font-size:.9em}
-a.play:hover span.t, a.play:focus-visible span.t{text-decoration:underline;color:var(--accent)}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+a.play:hover .t{text-decoration:underline;color:var(--accent)}
 .meta{color:var(--muted);font-size:.93rem;overflow-wrap:anywhere}
 .meta b{font-weight:600;color:var(--fg)}
 .extras{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px}
 .chip{font-size:.8rem;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
 a.chip{text-decoration:none;font-weight:600}
-a.chip:hover{text-decoration:underline}
+.tag{font-family:var(--body);font-weight:600;font-size:.75rem;line-height:1.3;padding:2px 8px;border-radius:6px;border:1px solid}
+li.new .tag{border-color:var(--grey);color:var(--muted)}
+li.alt .tag{border-color:var(--orange);color:var(--fg)}
 .novid{font-size:.8rem;color:var(--muted);font-style:italic}
 .empty{color:var(--muted);text-align:center;padding:24px}
+@media (prefers-reduced-motion: no-preference){.k{transition:background .15s,border-color .15s}}
 </style>
 </head>
 <body>
-
 <div class="wrap">
   <header>
     <h1>Line Dances</h1>
     <p class="sub" id="count"></p>
   </header>
+
+  <section class="key" aria-label="Colour key">
+    <div class="key-h">
+      <span class="key-t">Colour key · Légende</span>
+      <span class="key-hint">Tap a colour to show only those dances · Touchez une couleur pour filtrer</span>
+    </div>
+    <div class="key-items">
+      <button class="k" id="k-new" data-c="new" aria-pressed="false" type="button">
+        <span class="sw"></span>
+        <span class="lbl"><span class="en">Not yet taught</span><span class="fr">Pas encore enseignée</span></span>
+        <span class="n" id="n-new"></span>
+      </button>
+      <button class="k" id="k-alt" data-c="alt" aria-pressed="false" type="button">
+        <span class="sw"></span>
+        <span class="lbl"><span class="en">Same step, different music</span><span class="fr">Mêmes pas, musique différente</span></span>
+        <span class="n" id="n-alt"></span>
+      </button>
+    </div>
+  </section>
+
   <div class="search">
-    <label for="q" class="sub" style="position:absolute;left:-9999px">Search dances</label>
+    <label for="q" style="position:absolute;left:-9999px">Search dances</label>
     <input id="q" type="search" placeholder="Search by dance, choreographer or music…" autocomplete="off">
+    <p class="filtering" id="filtering" hidden><span id="ftext"></span><button type="button" id="clear">Show all · Tout afficher</button></p>
   </div>
   <div id="list"></div>
-  <p class="empty" id="none" hidden>No dances match that search.</p>
+  <p class="empty" id="none" hidden>No dances match. · Aucune danse trouvée.</p>
 </div>
 
 <script>
-const PL="&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=";
-const Y=(id,i)=>"https://www.youtube.com/watch?v="+id+(i?PL+i:"");
-const D=[
-["Absolute Dreams","Joyce Plaskett","Land of Dreams - Rosanne Cash",Y("Xhe6vYlDeXc",34)],
-["Andalouse","Fabien Regoli","Kendji Girac",Y("kQ-nHVdAZkE",49),"2eme & 4eme sections modifiée"],
-["Bachatango","Fernando Rey","Tu Mi Lucero - Fernando Rey",Y("SB89gcmyxBs",32)],
-["Back to the Start","Hayley Wheatley","Michael Schulte",Y("ww3UXZCmEq8",113)],
-["Canadian Stomp","Cindy Hall & Ginny Smith","Any Man of Mine - Shania Twain",Y("BvhI7M7hz-M",63),"section 4 modifiée"],
-["Choosin Texas","Nidhi Risi","Ella Langley",Y("ocWKwFr-lBI",86)],
-["Coco Na Na","Alison Johnstone","Everything's Alright - Azteck, DJ Koko",Y("Pzvh6sz7sRM",118)],
-["Crash and Burn","Gail Smith","Thomas Rhett",Y("cOpzaoK8EW0",23)],
-["Country Boom Boom","Frank Trace","Boom Boom - Lucas Hoge",Y("KWjs-L3EYhQ",54)],
-["Country Boy Loving","Maddison Glover","I'm from the Country - Tracy Byrd",Y("VRVsk56Lc9A",14)],
-["Cuban Rhythm","Frank Trace","La Echame Culpa - Luis Fonsi (mon choix)",Y("JekA2i5Ea98",23)],
-["Cumbia Conmigo","Ira Weisburd","La Vida es un Carnival - Celia Cruz (mon choix)",Y("pd3xyQi7mMk",4)],
-["Cumbia Semana","Ira Weisburd","Fin de Semana - Fito Olivares",Y("EzHtKOrb6WA",2)],
-["Don't Wanna Dance","Frank Trace","Toby X",Y("enYnEAs3e4A",28)],
-["Do Ya Love Me","Paula Jayne Ogilvie","The Contours - Sweet Soul Music",Y("4FlKT3z6X3o",83)],
-["Easy to Blame","Tina Argyle","Blame - James Johnson",Y("RhG6zUTMXm0",109)],
-["French Toast","Frank Trace","Mes Emmerdes - Charles Aznavour",Y("yYoOysIUSGU",52)],
-["Fly Me to the Moon","Rosie Malari","Viens on Essaie - Vitaa & Julien Dore (mon choix)",Y("MjwnWDOWA40",30)],
-["Free and Easy","Malcolm & Viv Owen","That's how I got to Memphis - Roch Voisine",Y("X_TEkt5y9cE",41)],
-["Gives me Shivers","Brandon Zahorsky","Ed Sheeran (Ofenbach Remix)",Y("y-sW4WwIFCo"),"section 2 modifiée",[["version française",Y("v4_IkAFau0w")]]],
-["Glass of Wine","Malene Jakobsen","Cry to Me - Solomon Burke",Y("42CMX9xAhhA",66)],
-["Half a Cha","Rob Fowler","Half a Song - Cody Johnson",Y("hX4hSJDpBGg",33)],
-["Hit the Road Jack","Michelle Miller","Ray Charles",""],
-["Heave Away","Rob Fowler","The Fables",Y("tx8d8TdJzB0",44)],
-["Homecoming","Lee Hamilton","Don Louis",Y("MkWVyXZmyCE",84)],
-["Hoedown","Gary O'Reilly","Ink",Y("YEi34tBR2oM",77)],
-["I love that Dance","Tim Gauci","&5678 Productions",Y("a9OUuN0ml30",102)],
-["J'ai Cherché","Fred Aireche","Derniere Danse - Indila (mon choix)",Y("B9WZBHIjaag",20)],
-["Jerusalema","Adilson Maiza","Master KG",Y("b54P7xPiBjI")],
-["Kuduro","","Danza Kuduro - Don Lore V",Y("Q6LCJADfVCs"),"section 4 modifiée"],
-["La Chappeloise","","Tell Me Ma - Sham Rock",Y("Hy1OAD9eOaw",40)],
-["Little Cupid","Frank Trace","Stand by Me - Ben E King (mon choix)",Y("hBFwj6Sw0kg",25)],
-["Little Rhumba","Donna Laurin","Sway - Michael Buble",Y("j0s9TPRGkZM",27)],
-["Loca Loca","Roy Verdonk","DJ XOXO",Y("aqUg8gRhNkQ",91)],
-["Love Potion 666","Rob Fowler","DJTEXX",Y("GFkrIuoZ_zM",75)],
-["Madison","","Last Night - Chris Anderson",Y("SFQvp1cISAA",65)],
-["Movimiento","Karl Harry Winson","Noevan Cielo",Y("UkkU2LBRn5g",103),"tutorial",[["dance","https://www.youtube.com/watch?v=gh0QmoGPEAU&t=41s"]]],
-["9 to 5","Lesley Stewart","Dolly Parton",Y("MShev6VmfjQ")],
-["Red Hot Salsa","Christina Browner","Dave Sheriff",Y("QADVc6NPh9c",45)],
-["SNAP","Vivienne Scott","Anthem - Brett Kissel",Y("kG_yRiwwH6Q",18)],
-["Southern Soul Bounce","Ira Weisburd & Roy Verdonk","Ms Jody","https://www.youtube.com/watch?v=w0LoRMRcRFw&t=299s"],
-["Stomp 2,3,4","Rob Fowler","2341 Studios",Y("KZLKhzADJCY",74)],
-["Strummingbird","Maddison Glover","One More - James Johnston",Y("IPsPe6V8VD4",108)],
-["Suavemente","Michelle Miller","Suave - Nayer",""],
-["Sweet Pea","Frank Trace","Bebeto - Kendji Girac & Soolking (mon choix)",Y("Ku6pG656wGw",49)],
-["The Door","Jeff & Kari Smilko","Teddy Swims",Y("RzhkJwQNE9g",35)],
-["The Majestic","Frank Trace","Dion & the Belmonts",Y("3aS5yVrBPt0",21)],
-["The Man with the Hat","Gary O'Reilly","Me Auld Skilara Hat - Ciaran Rosney",Y("0OyuUOcnkX4",106)],
-["Until the Dawn","Gary Rafferty","Marvin Gaye - Charlie Puth",Y("PKNlEOn5ZNI",95)],
-["When you Smile","Roy Verdonk","Rune Rudberg",Y("88AmzqHs-z0",94)],
-["Yolanda","Ira Weisburd","Pastor Lopez",Y("k_mcCSmnvt4",6)]
-];
+const D=[{"n": "Absolute Dreams", "c": "Joyce Plaskett", "m": "Land of Dreams - Rosanne Cash", "u": "https://www.youtube.com/watch?v=Xhe6vYlDeXc&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=34", "note": "", "extra": [], "cat": ""}, {"n": "Andalouse", "c": "Fabien Regoli", "m": "Kendji Girac", "u": "https://www.youtube.com/watch?v=kQ-nHVdAZkE&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=49", "note": "2eme & 4eme sections modifiée", "extra": [], "cat": "new"}, {"n": "Bachatango", "c": "Fernando Rey", "m": "Tu Mi Lucero - Fernando Rey", "u": "https://www.youtube.com/watch?v=SB89gcmyxBs&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=32", "note": "", "extra": [], "cat": ""}, {"n": "Back to the Start", "c": "Hayley Wheatley", "m": "Michael Schulte", "u": "https://www.youtube.com/watch?v=ww3UXZCmEq8&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=113", "note": "", "extra": [], "cat": ""}, {"n": "Canadian Stomp", "c": "Cindy Hall & Ginny Smith", "m": "Any Man of Mine - Shania Twain", "u": "https://www.youtube.com/watch?v=BvhI7M7hz-M&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=63", "note": "section 4 modifiée", "extra": [], "cat": "new"}, {"n": "Choosin Texas", "c": "Nidhi Risi", "m": "Ella Langley", "u": "https://www.youtube.com/watch?v=ocWKwFr-lBI&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=86", "note": "", "extra": [], "cat": ""}, {"n": "Coco Na Na", "c": "Alison Johnstone", "m": "Everything's Alright - Azteck, DJ Koko", "u": "https://www.youtube.com/watch?v=Pzvh6sz7sRM&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=118", "note": "", "extra": [], "cat": ""}, {"n": "Crash and Burn", "c": "Gail Smith", "m": "Thomas Rhett", "u": "https://www.youtube.com/watch?v=cOpzaoK8EW0&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=23", "note": "", "extra": [], "cat": ""}, {"n": "Country Boom Boom", "c": "Frank Trace", "m": "Boom Boom - Lucas Hoge", "u": "https://www.youtube.com/watch?v=KWjs-L3EYhQ&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=54", "note": "", "extra": [], "cat": "new"}, {"n": "Country Boy Loving", "c": "Maddison Glover", "m": "I'm from the Country - Tracy Byrd", "u": "https://www.youtube.com/watch?v=VRVsk56Lc9A&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=14", "note": "", "extra": [], "cat": ""}, {"n": "Cuban Rhythm", "c": "Frank Trace", "m": "La Echame Culpa - Luis Fonsi (mon choix)", "u": "https://www.youtube.com/watch?v=JekA2i5Ea98&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=23", "note": "", "extra": [], "cat": "alt"}, {"n": "Cumbia Conmigo", "c": "Ira Weisburd", "m": "La Vida es un Carnival - Celia Cruz (mon choix)", "u": "https://www.youtube.com/watch?v=pd3xyQi7mMk&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=4", "note": "", "extra": [], "cat": "new"}, {"n": "Cumbia Semana", "c": "Ira Weisburd", "m": "Fin de Semana - Fito Olivares", "u": "https://www.youtube.com/watch?v=EzHtKOrb6WA&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=2", "note": "", "extra": [], "cat": ""}, {"n": "Don't Wanna Dance", "c": "Frank Trace", "m": "Toby X", "u": "https://www.youtube.com/watch?v=enYnEAs3e4A&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=28", "note": "", "extra": [], "cat": ""}, {"n": "Do Ya Love Me", "c": "Paula Jayne Ogilvie", "m": "The Contours - Sweet Soul Music", "u": "https://www.youtube.com/watch?v=4FlKT3z6X3o&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=83", "note": "", "extra": [], "cat": ""}, {"n": "Easy to Blame", "c": "Tina Argyle", "m": "Blame - James Johnson", "u": "https://www.youtube.com/watch?v=RhG6zUTMXm0&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=109", "note": "", "extra": [], "cat": "new"}, {"n": "French Toast", "c": "Frank Trace", "m": "Mes Emmerdes - Charles Aznavour", "u": "https://www.youtube.com/watch?v=yYoOysIUSGU&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=52", "note": "", "extra": [], "cat": ""}, {"n": "Fly Me to the Moon", "c": "Rosie Malari", "m": "Viens on Essaie - Vitaa & Julien Dore (mon choix)", "u": "https://www.youtube.com/watch?v=MjwnWDOWA40&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=30", "note": "", "extra": [], "cat": "new"}, {"n": "Free and Easy", "c": "Malcolm & Viv Owen", "m": "That's how I got to Memphis - Roch Voisine", "u": "https://www.youtube.com/watch?v=X_TEkt5y9cE&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=41", "note": "", "extra": [], "cat": ""}, {"n": "Gives me Shivers", "c": "Brandon Zahorsky", "m": "Ed Sheeran (Ofenbach Remix)", "u": "https://www.youtube.com/watch?v=y-sW4WwIFCo", "note": "section 2 modifiée", "extra": [["version française", "https://www.youtube.com/watch?v=v4_IkAFau0w"]], "cat": "new"}, {"n": "Glass of Wine", "c": "Malene Jakobsen", "m": "Cry to Me - Solomon Burke", "u": "https://www.youtube.com/watch?v=42CMX9xAhhA&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=66", "note": "", "extra": [], "cat": ""}, {"n": "Half a Cha", "c": "Rob Fowler", "m": "Half a Song - Cody Johnson", "u": "https://www.youtube.com/watch?v=hX4hSJDpBGg&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=33", "note": "", "extra": [], "cat": ""}, {"n": "Hit the Road Jack", "c": "Michelle Miller", "m": "Ray Charles", "u": "", "note": "", "extra": [], "cat": ""}, {"n": "Heave Away", "c": "Rob Fowler", "m": "The Fables", "u": "https://www.youtube.com/watch?v=tx8d8TdJzB0&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=44", "note": "", "extra": [], "cat": ""}, {"n": "Homecoming", "c": "Lee Hamilton", "m": "Don Louis", "u": "https://www.youtube.com/watch?v=MkWVyXZmyCE&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=84", "note": "", "extra": [], "cat": "new"}, {"n": "Hoedown", "c": "Gary O'Reilly", "m": "Ink", "u": "https://www.youtube.com/watch?v=YEi34tBR2oM&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=77", "note": "", "extra": [], "cat": "new"}, {"n": "I love that Dance", "c": "Tim Gauci", "m": "&5678 Productions", "u": "https://www.youtube.com/watch?v=a9OUuN0ml30&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=102", "note": "", "extra": [], "cat": ""}, {"n": "J'ai Cherché", "c": "Fred Aireche", "m": "Derniere Danse - Indila (mon choix)", "u": "https://www.youtube.com/watch?v=B9WZBHIjaag&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=20", "note": "", "extra": [], "cat": "alt"}, {"n": "Jerusalema", "c": "Adilson Maiza", "m": "Master KG", "u": "https://www.youtube.com/watch?v=b54P7xPiBjI", "note": "", "extra": [], "cat": ""}, {"n": "Kuduro", "c": "", "m": "Danza Kuduro - Don Lore V", "u": "https://www.youtube.com/watch?v=Q6LCJADfVCs", "note": "section 4 modifiée", "extra": [], "cat": ""}, {"n": "La Chappeloise", "c": "", "m": "Tell Me Ma - Sham Rock", "u": "https://www.youtube.com/watch?v=Hy1OAD9eOaw&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=40", "note": "", "extra": [], "cat": ""}, {"n": "Little Cupid", "c": "Frank Trace", "m": "Stand by Me - Ben E King (mon choix)", "u": "https://www.youtube.com/watch?v=hBFwj6Sw0kg&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=25", "note": "", "extra": [], "cat": "alt"}, {"n": "Little Rhumba", "c": "Donna Laurin", "m": "Sway - Michael Buble", "u": "https://www.youtube.com/watch?v=j0s9TPRGkZM&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=27", "note": "", "extra": [], "cat": ""}, {"n": "Loca Loca", "c": "Roy Verdonk", "m": "DJ XOXO", "u": "https://www.youtube.com/watch?v=aqUg8gRhNkQ&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=91", "note": "", "extra": [], "cat": "new"}, {"n": "Love Potion 666", "c": "Rob Fowler", "m": "DJTEXX", "u": "https://www.youtube.com/watch?v=GFkrIuoZ_zM&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=75", "note": "", "extra": [], "cat": ""}, {"n": "Madison", "c": "", "m": "Last Night - Chris Anderson", "u": "https://www.youtube.com/watch?v=SFQvp1cISAA&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=65", "note": "", "extra": [], "cat": ""}, {"n": "Movimiento", "c": "Karl Harry Winson", "m": "Noevan Cielo", "u": "https://www.youtube.com/watch?v=UkkU2LBRn5g&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=103", "note": "tutorial", "extra": [["dance", "https://www.youtube.com/watch?v=gh0QmoGPEAU&t=41s"]], "cat": "new"}, {"n": "9 to 5", "c": "Lesley Stewart", "m": "Dolly Parton", "u": "https://www.youtube.com/watch?v=MShev6VmfjQ", "note": "", "extra": [], "cat": ""}, {"n": "Red Hot Salsa", "c": "Christina Browner", "m": "Dave Sheriff", "u": "https://www.youtube.com/watch?v=QADVc6NPh9c&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=45", "note": "", "extra": [], "cat": "new"}, {"n": "SNAP", "c": "Vivienne Scott", "m": "Anthem - Brett Kissel", "u": "https://www.youtube.com/watch?v=kG_yRiwwH6Q&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=18", "note": "", "extra": [], "cat": ""}, {"n": "Southern Soul Bounce", "c": "Ira Weisburd & Roy Verdonk", "m": "Ms Jody", "u": "https://www.youtube.com/watch?v=w0LoRMRcRFw&t=299s", "note": "", "extra": [], "cat": "new"}, {"n": "Stomp 2,3,4", "c": "Rob Fowler", "m": "2341 Studios", "u": "https://www.youtube.com/watch?v=KZLKhzADJCY&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=74", "note": "", "extra": [], "cat": "new"}, {"n": "Strummingbird", "c": "Maddison Glover", "m": "One More - James Johnston", "u": "https://www.youtube.com/watch?v=IPsPe6V8VD4&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=108", "note": "", "extra": [], "cat": "new"}, {"n": "Suavemente", "c": "Michelle Miller", "m": "Suave - Nayer", "u": "", "note": "", "extra": [], "cat": ""}, {"n": "Sweet Pea", "c": "Frank Trace", "m": "Bebeto - Kendji Girac & Soolking (mon choix)", "u": "https://www.youtube.com/watch?v=Ku6pG656wGw&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=49", "note": "", "extra": [], "cat": "alt"}, {"n": "The Door", "c": "Jeff & Kari Smilko", "m": "Teddy Swims", "u": "https://www.youtube.com/watch?v=RzhkJwQNE9g&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=35", "note": "", "extra": [], "cat": ""}, {"n": "The Majestic", "c": "Frank Trace", "m": "Dion & the Belmonts", "u": "https://www.youtube.com/watch?v=3aS5yVrBPt0&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=21", "note": "", "extra": [], "cat": ""}, {"n": "The Man with the Hat", "c": "Gary O'Reilly", "m": "Me Auld Skilara Hat - Ciaran Rosney", "u": "https://www.youtube.com/watch?v=0OyuUOcnkX4&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=106", "note": "", "extra": [], "cat": "new"}, {"n": "Until the Dawn", "c": "Gary Rafferty", "m": "Marvin Gaye - Charlie Puth", "u": "https://www.youtube.com/watch?v=PKNlEOn5ZNI&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=95", "note": "", "extra": [], "cat": "new"}, {"n": "When you Smile", "c": "Roy Verdonk", "m": "Rune Rudberg", "u": "https://www.youtube.com/watch?v=88AmzqHs-z0&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=94", "note": "", "extra": [], "cat": "new"}, {"n": "Yolanda", "c": "Ira Weisburd", "m": "Pastor Lopez", "u": "https://www.youtube.com/watch?v=k_mcCSmnvt4&list=PL5X46rQpi_VqvjVDyJod29JBmvFAhLhjM&index=6", "note": "", "extra": [], "cat": ""}];
+const LABEL={new:["Not yet taught","Pas encore enseignée"],alt:["Same step, different music","Mêmes pas, musique différente"]};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
-const rows=D.map(([n,c,m,u,note,extra])=>({n,c,m,u,note,extra:extra||[],k:norm([n,c,m,note||""].join(" "))}))
-  .sort((a,b)=>a.n.localeCompare(b.n,"fr",{sensitivity:"base"}));
-const list=document.getElementById("list"),none=document.getElementById("none");
-document.getElementById("count").textContent=rows.length+" dances · tap a name to watch the video";
-function render(q){
-  const t=norm(q.trim());const show=rows.filter(r=>!t||r.k.includes(t));
+const rows=D.map(r=>({...r,k:norm([r.n,r.c,r.m,r.note].join(" "))})).sort((a,b)=>a.n.localeCompare(b.n,"fr",{sensitivity:"base"}));
+const $=id=>document.getElementById(id);
+let cat="";
+$("count").textContent=rows.length+" dances · tap a name to watch the video";
+for(const c of ["new","alt"])$("n-"+c).textContent=rows.filter(r=>r.cat===c).length;
+function render(){
+  const t=norm($("q").value.trim());
+  const show=rows.filter(r=>(!t||r.k.includes(t))&&(!cat||r.cat===cat));
   let html="",cur="",open=false;
   for(const r of show){
     const L=/[a-z]/i.test(r.n[0])?r.n[0].toUpperCase():"#";
     if(L!==cur){if(open)html+="</ul>";html+='<div class="letter">'+L+"</div><ul>";cur=L;open=true}
-    const name=r.u?'<a class="play" href="'+esc(r.u)+'" target="_blank" rel="noopener"><span class="tri">▶</span><span class="t">'+esc(r.n)+"</span></a>":esc(r.n);
+    const nm=r.u?'<a class="play" href="'+esc(r.u)+'" target="_blank" rel="noopener"><span class="tri">▶</span><span class="t">'+esc(r.n)+"</span></a>":esc(r.n);
+    const tag=r.cat?'<span class="tag">'+esc(LABEL[r.cat][0])+' · '+esc(LABEL[r.cat][1])+"</span>":"";
     const meta=[r.c?"<b>"+esc(r.c)+"</b>":"",esc(r.m)].filter(Boolean).join(" · ");
     let ex=r.note?'<span class="chip">'+esc(r.note)+"</span>":"";
     for(const [lab,url] of r.extra)ex+='<a class="chip" href="'+esc(url)+'" target="_blank" rel="noopener">▶ '+esc(lab)+"</a>";
     if(!r.u)ex+='<span class="novid">no video yet</span>';
-    html+='<li><div class="name">'+name+'</div><div class="meta">'+meta+"</div>"+(ex?'<div class="extras">'+ex+"</div>":"")+"</li>";
+    html+='<li class="'+(r.cat||"")+'"><div class="name">'+nm+tag+'</div><div class="meta">'+meta+"</div>"+(ex?'<div class="extras">'+ex+"</div>":"")+"</li>";
   }
   if(open)html+="</ul>";
-  list.innerHTML=html;none.hidden=show.length>0;
+  $("list").innerHTML=html;$("none").hidden=show.length>0;
+  $("filtering").hidden=!cat;
+  if(cat)$("ftext").textContent="Showing / Affiché : "+LABEL[cat][0]+" · "+LABEL[cat][1];
+  for(const c of ["new","alt"])$("k-"+c).setAttribute("aria-pressed",String(cat===c));
 }
-const q=document.getElementById("q");q.addEventListener("input",()=>render(q.value));render("");
+for(const c of ["new","alt"])$("k-"+c).addEventListener("click",()=>{cat=cat===c?"":c;render()});
+$("clear").addEventListener("click",()=>{cat="";render()});
+$("q").addEventListener("input",render);
+render();
 </script>
-
 </body>
 </html>
